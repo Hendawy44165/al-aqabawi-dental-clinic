@@ -1,0 +1,15 @@
+flask
+python-dotenv
+requests
+langchain-openai
+langgraph
+langchain-core
+langsmith
+langchain
+fastapi
+uvicorn
+mcp
+sse-starlette
+httpx
+pydantic
+pandas

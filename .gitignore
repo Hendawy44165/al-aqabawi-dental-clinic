@@ -1,0 +1,32 @@
+# Node modules and build output
+node_modules/
+frontend/node_modules/
+dist/
+frontend/dist/
+.vite/
+
+
+# Python-generated files & Databases
+__pycache__/
+*.py[oc]
+build/
+*.db
+*.sqlite
+*.sqlite3
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+.python-version
+pyproject.toml
+uv.lock
+
+# Secrets
+*.env
+
+# Other
+.vscode/
+screenshots/
+.ideas.md
+
