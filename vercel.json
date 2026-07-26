@@ -27,6 +27,14 @@
       "dest": "backend/api/index.py"
     },
     {
+      "src": "/assets/(.*)",
+      "dest": "frontend/assets/$1"
+    },
+    {
+      "src": "/logo.jpg",
+      "dest": "frontend/logo.jpg"
+    },
+    {
       "handle": "filesystem"
     },
     {
@@ -35,3 +43,4 @@
     }
   ]
 }
+
