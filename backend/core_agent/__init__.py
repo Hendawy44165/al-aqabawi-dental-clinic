@@ -1,5 +1,6 @@
 """Nuit Bot v2 — Core Agent package."""
 
-from .nuit_bot import NuitBot
+from .clinic_bot import ClinicBot
 
-__all__ = ["NuitBot"]
+__all__ = ["ClinicBot"]
+
