@@ -1,33 +1,38 @@
 import os
 import re
-from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
-
-load_dotenv()
+from dotenv import load_dotenv, find_dotenv
+from langchain_openai import ChatOpenAI
 
 _HERE = os.path.dirname(os.path.abspath(__file__))
-_PROMPTS_DIR = os.path.join(_HERE, "prompts")
+_BACKEND_DIR = os.path.dirname(_HERE)
+_ROOT_DIR = os.path.dirname(_BACKEND_DIR)
 
+# Load .env from backend folder, root folder, and environment
+load_dotenv(find_dotenv())
+load_dotenv(os.path.join(_BACKEND_DIR, ".env"))
+load_dotenv(os.path.join(_ROOT_DIR, ".env"))
+
+_PROMPTS_DIR = os.path.join(_HERE, "prompts")
 THREAD_ID = "498wa1d6s5af4"
 
 
 def get_model():
-    """Get the shared LLM instance, supporting dynamic model changes via environment variables."""
-    api_key = os.getenv("PROVIDER_API_KEY")
+    """Get the shared LLM instance, supporting GitHub provider & OpenAI models."""
+    api_key = os.getenv("PROVIDER_API_KEY") or os.getenv("OPENAI_API_KEY")
     base_url = os.getenv("PROVIDER_BASE_URL")
-    model = os.getenv("PROVIDER_MODEL_NAME")
-    model_provider = os.getenv("MODEL_PROVIDER")
+    model_name = os.getenv("PROVIDER_MODEL_NAME", "openai/gpt-4.1")
 
     kwargs = {
-        "model": model,
-        "model_provider": model_provider,
+        "model": model_name,
+        "temperature": 0.3,
     }
     if api_key:
         kwargs["api_key"] = api_key
     if base_url:
         kwargs["base_url"] = base_url
 
-    return init_chat_model(**kwargs)
+    return ChatOpenAI(**kwargs)
+
 
 
 def load_prompt(filename: str) -> str:
