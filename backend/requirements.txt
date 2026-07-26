@@ -13,3 +13,4 @@ sse-starlette
 httpx
 pydantic
 pandas
+sqlglot
