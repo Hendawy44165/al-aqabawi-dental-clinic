@@ -157,12 +157,13 @@ def api_chat(req: ChatRequest):
             set_ai_enabled(thread_id, 0)
 
             
+    except Exception as e:
+        print(f"Error in /api/chat: {e}")
         return {
-            "reply": bot_reply,
-            "sentiment": res.get("sentiment"),
-            "intent": res.get("intent"),
-            "type": res.get("type"),
+            "reply": f"⚠️ خطأ في تشغيل البوت الذكي: {str(e)}. يرجى التأكد من إضافة مفتاح OPENAI_API_KEY بداخل Vercel Environment Variables.",
+            "sentiment": "error",
+            "intent": "error",
+            "type": "error",
             "ai_paused": False
         }
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+
